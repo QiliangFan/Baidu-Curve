@@ -98,7 +98,7 @@ check_py() {
     if [ ! -e "${G_ROOT_DIR}/venv" ]; then
         # pip install --upgrade pip
         # pip install virtualenv
-        virtualenv --no-site-packages ${G_VENV_DIR}
+        virtualenv ${G_VENV_DIR}
     fi
     source ${G_VENV_DIR}/bin/activate
     pip install -r ${G_API_DIR}/requirements.txt

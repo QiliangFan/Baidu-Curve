@@ -1,3 +1,22 @@
+# Problem 1: --no-site-packages
+
+> virtualenv: error: unrecognized arguments: --no-site-packages
+
+更新版本的virtualenv 不需要--no-site-packages, 已经是自带了, 删除control.sh中的--no-site-packages 即可
+
+# Problem 2: Failed building wheel for uwsgi
+
+在ubuntu上, gcc为gcc-7或者gcc-8, 编译uwsgi需要gcc-4.8
+
+```shel
+sudo apt-get install gcc-4.8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 500
+pip install uwsgi
+```
+
+> 8080 太多人用, 改为8686端口了
+
+----
 Curve
 ---
 
