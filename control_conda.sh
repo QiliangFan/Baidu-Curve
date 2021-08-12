@@ -12,8 +12,8 @@
 #   2. other:
 #       * npm is required
 
-set -u
-set -e
+# set -u
+# set -e
 
 cd "$(dirname "$0")"
 readonly G_ROOT_DIR=`pwd`

@@ -1,3 +1,13 @@
+> 只支持python2.7!!
+>
+> 有conda环境就必须用control_conda.sh
+> 
+> contol脚本中的set -e注释掉才能看到错误信息, 如果缺少啥库直接装或者改名(这句话如果没看懂那你就傻傻的装库就行)
+>
+> 如果注释了set -e 启动时没报错还是访问不了, 通常是端口冲突, 可以在log里看到
+> 
+> 这个仓库使用control_conda.sh启动可以直接用, 端口12345
+
 # Problem 1: --no-site-packages
 
 > virtualenv: error: unrecognized arguments: --no-site-packages
@@ -14,7 +24,36 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 500
 pip install uwsgi
 ```
 
+# Problem 3: `libpcre.so.1: cannot open shared object file: No such file or directory`
+
+```shell
+# 先全局搜索, 不好下载这个lib
+find / -name "libpcre"
+
+# 然后改个后缀, 如果能找到
+
+```
+
+# Problem 4: `libssl.so.1.1: cannot open shared object file: No such file or directory`
+
+```shell
+sudo apt-get update
+sudo apt-get install libssl1.0.0 libssl-dev
+
+cd /lib/x86_64-linux-gnu
+sudo ln -s libssl.so.1.0.0 libssl.so.1.1
+sudo ln -s libcrypto.so.1.0.0 libcrypto.so.1.1
+```
+
+# Problem 5: `ERROR: Package ‘pyrsistent‘ requires a different Python: 2.7.5 not in ‘＞=3.5‘`
+
+```shell
+# 在执行 start前手动安装
+pip install pyrsistent==0.15.0  # 0.14.0 也行
+```
+
 # Tips1: Node.js-`v13.2.0` works properly~
+
 
 > 8080 太多人用, 改为8686端口了 
 
