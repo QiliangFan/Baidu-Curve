@@ -14,6 +14,8 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 500
 pip install uwsgi
 ```
 
+# Tips1: Node.js-`v13.2.0` works properly~
+
 > 8080 太多人用, 改为8686端口了 
 
 ----
