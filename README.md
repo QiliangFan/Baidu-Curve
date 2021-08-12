@@ -14,7 +14,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 500
 pip install uwsgi
 ```
 
-> 8080 太多人用, 改为8686端口了
+> 8080 太多人用, 改为8686端口了 
 
 ----
 Curve
