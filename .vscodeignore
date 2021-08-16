@@ -1,0 +1,4 @@
+api/curve/web/
+*.pyc
+**/log/
+**/node_modules/

@@ -187,8 +187,19 @@ export default class Home extends Component {
                     height: overlayHeight + 'px',
                     left: '200px'
                 }} onClick={isShow => this.toggleContainerOverlay(false)}></div>
-                <Dialog ref="dialog"></Dialog>
-                <MessageTip ref="messageTip"></MessageTip>
+                <Dialog 
+                    ref="dialog"
+                    showUploading={this.showUploading}
+                    hideUploading={this.hideUploading}
+                    uploadingProcess={percent => this.uploadingProcess(percent)}
+                    showLoading={this.showLoading}
+                    ></Dialog>
+                <MessageTip 
+                    ref="messageTip"
+                    showUploading={this.showUploading}
+                    hideUploading={this.hideUploading}
+                    uploadingProcess={percent => this.uploadingProcess(percent)}
+                    showLoading={this.showLoading}></MessageTip>
             </div>
         );
     }

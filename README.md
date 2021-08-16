@@ -8,7 +8,7 @@
 > 
 > 这个仓库使用control_conda.sh启动可以直接用, 端口12345
 > 
-> 更新 2021-08-16: 由于不清楚作者开发时使用的react版本, 现有react版本不能正常运行所有js文件, 对js文件进行了少量修改
+> 更新 2021-08-16: 修复了源码中react代码的bug
 
 # Problem 1: --no-site-packages
 
