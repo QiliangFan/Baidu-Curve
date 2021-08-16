@@ -170,3 +170,5 @@ crashlytics-build.properties
 fabric.propertiesmv
 
 pylib_version
+
+.vscode

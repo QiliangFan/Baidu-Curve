@@ -554,13 +554,14 @@ export default class Trend extends Component {
     }
 
     label(selectedMin, selectedMax, selectType, e) {
+        console.log(e)
         let dataName = this.props.dataName;
         let chart = this.chart;
         let url = api.labelTrend
             + dataName + '/label'
             + '?startTime=' + selectedMin
             + '&endTime=' + selectedMax
-            + '&label=1';
+            + '&label=' + e.button == 0 ? 1 : 0;
         let time = chart && chart.xAxis[0].getExtremes();
         if (selectType === 'simple') {
             axiosInstance.put(url).then(response => {

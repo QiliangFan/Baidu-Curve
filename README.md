@@ -17,6 +17,8 @@
 > `[BUG]` 更新2021-08-06: `messageCallback is not a function`
 >
 > `[BUG]` 更新2021-08-06: label异常问题: 0 和 0.0 解析不一致
+>
+> `[BUG]` 更新2021-08-06: 无法取消label的问题: trend.js 的 label函数
 
 # Problem 1: --no-site-packages
 
