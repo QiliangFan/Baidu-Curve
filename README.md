@@ -9,8 +9,10 @@
 > 这个仓库使用control_conda.sh启动可以直接用, 端口12345
 > 
 > `[BUG]` 更新 2021-08-16: 修复了源码中react代码的bug `父子组件属性传递问题`- `showLoading` | `hidLoading` |  `...`
+> 
 >  `[TIPS]` 更新2021-08-16: uwsgi的配置文件中processes不应大于1, 因为sqlite3不支持并发的连接
 > 
+> `[Dependency]` 更新2021-08-16: 解决abc导入失败
 
 # Problem 1: --no-site-packages
 

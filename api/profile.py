@@ -17,6 +17,6 @@ if __name__ == '__main__':
     app = create_app()
     app.config['PROFILE'] = True
     app.config['SQLALCHEMY_ECHO'] = True
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
-    app.run(debug=True, host=DEFAULT_HOST, port=DEFAULT_PORT, threaded=True)
+    app.run(debug=False, host=DEFAULT_HOST, port=DEFAULT_PORT, threaded=True)

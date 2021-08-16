@@ -13,7 +13,6 @@ from .common import (
     auto_repr
 )
 
-
 class BandItem(db.Model):
     """
     band for reference

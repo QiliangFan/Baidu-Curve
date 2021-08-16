@@ -153,7 +153,7 @@ class DataDataname(Resource):
                         value = self._parse_value(line[1])
                     label = None
                     if len(line) > 2:
-                        label = self._parse_label(line[2])
+                        label = self._parse_label(int(line[2]))
                     points[timestamp] = (timestamp, value, label)
                 except ValueError as e:
                     msg = 'line %d: %s' % (reader.line_num, e.message)

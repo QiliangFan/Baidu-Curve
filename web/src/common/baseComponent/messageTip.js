@@ -29,7 +29,9 @@ export default class MessageTip extends Component {
             }, () => {
                 setTimeout(() => {
                     this.state.options.messageShow = false;
-                    this.state.options.messageCallback(this.state.options);
+                    console.log(this.state.options.messageCallback)
+                    console.log(this.state.options)
+                    this.state.options.messageCallback(this.state.options);           
                     this.setState({
                         options: this.state.options
                     });
