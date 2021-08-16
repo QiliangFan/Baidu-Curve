@@ -85,7 +85,11 @@ export default class UploadData extends Component {
                         messageType: 'error',
                         messageContent: self.state.fileName + " upload failed...Can't upload file with the same name, please try again",
                         messageShow: true,
-                        messageDuration: 2.5
+                        messageDuration: 2.5,
+                        messageCallback: function () {
+                            let nextUrl = '/home/' + dataName;
+                            hashHistory.push(nextUrl);
+                        }
                     });
                     // Hidden mask
                     self.props.hideUploading();

@@ -13,6 +13,8 @@
 >  `[TIPS]` 更新2021-08-16: uwsgi的配置文件中processes不应大于1, 因为sqlite3不支持并发的连接
 > 
 > `[Dependency]` 更新2021-08-16: 解决abc导入失败
+>
+> `[BUG]` 更新2021-08-06: `messageCallback is not a function`
 
 # Problem 1: --no-site-packages
 

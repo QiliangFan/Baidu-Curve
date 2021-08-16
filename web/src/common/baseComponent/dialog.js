@@ -65,7 +65,8 @@ export default class Dialog extends Component {
                 messageType: 'success',
                 messageContent: this.state.options.dialogCallbackMessage.success,
                 messageShow: true,
-                messageDuration: 2.5
+                messageDuration: 2.5,
+                messageCallback: function () {}
             });
         }).catch(err => {
             this.closeDialog();
@@ -74,7 +75,8 @@ export default class Dialog extends Component {
                 messageType: 'error',
                 messageContent: this.state.options.dialogCallbackMessage.error,
                 messageShow: true,
-                messageDuration: 2.5
+                messageDuration: 2.5,
+                messageCallback: function () {}
             });
         });
     }
