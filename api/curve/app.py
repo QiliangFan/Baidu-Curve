@@ -57,7 +57,7 @@ def create_app():
     app.config['SECRET_KEY'] = ''.join(random.sample(string.ascii_letters + string.digits, 8))
 
     app.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URL
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     db.init_app(app)
     with app.test_request_context():
         db.create_all()
