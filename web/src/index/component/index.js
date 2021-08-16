@@ -193,13 +193,16 @@ export default class Home extends Component {
                     hideUploading={this.hideUploading}
                     uploadingProcess={percent => this.uploadingProcess(percent)}
                     showLoading={this.showLoading}
+                    hideLoading={this.hideLoading}
                     ></Dialog>
                 <MessageTip 
                     ref="messageTip"
                     showUploading={this.showUploading}
                     hideUploading={this.hideUploading}
                     uploadingProcess={percent => this.uploadingProcess(percent)}
-                    showLoading={this.showLoading}></MessageTip>
+                    showLoading={this.showLoading}
+                    hideLoading={this.hideLoading}
+                    ></MessageTip>
             </div>
         );
     }
