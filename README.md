@@ -15,6 +15,8 @@
 > `[Dependency]` 更新2021-08-16: 解决abc导入失败
 >
 > `[BUG]` 更新2021-08-06: `messageCallback is not a function`
+>
+> `[BUG]` 更新2021-08-06: label异常问题: 0 和 0.0 解析不一致
 
 # Problem 1: --no-site-packages
 

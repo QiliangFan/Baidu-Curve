@@ -2,3 +2,7 @@ api/curve/web/
 *.pyc
 **/log/
 **/node_modules/
+*.less
+*.html
+**/__pycache__/
+*.pyc
