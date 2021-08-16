@@ -55,7 +55,7 @@ export default class Dialog extends Component {
     confirm() {
         let params = this.state.options.dialogParams;
         let {url, name} = params;
-        this.props.showLoading();
+        // this.props.showLoading();
         axiosInstance.delete(url).then(response => {
             this.state.options.dialogCallback.okCallback(name);
             // close modal

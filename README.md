@@ -7,6 +7,8 @@
 > 如果注释了set -e 启动时没报错还是访问不了, 通常是端口冲突, 可以在log里看到
 > 
 > 这个仓库使用control_conda.sh启动可以直接用, 端口12345
+> 
+> 更新 2021-08-16: 由于不清楚作者开发时使用的react版本, 现有react版本不能正常运行所有js文件, 对js文件进行了少量修改
 
 # Problem 1: --no-site-packages
 
@@ -54,8 +56,9 @@ pip install pyrsistent==0.15.0  # 0.14.0 也行
 
 # Tips1: Node.js-`v13.2.0` works properly~
 
+# Tips2: curve/web 是前端构建后的文件夹, 删除即可重新构建
 
-> 8080 太多人用, 改为8686端口了 
+# Tips3: 如果add的数据太大, curve需要比较久的时间来处理
 
 ----
 Curve
