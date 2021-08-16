@@ -1,0 +1,721 @@
+swagger: '2.0'
+info:
+  title: Web API for Curve
+  description: Web API for Curve, which is a label tool for Time-series data
+  version: 0.1.2
+host: ''
+schemes:
+  - https
+  - http
+basePath: /v1
+consumes:
+  - application/form-data
+produces:
+  - application/json
+paths:
+  '/menus':
+    get:
+      summary: get operation list
+      tags:
+        - Menu
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MenuResponse'
+  '/datas':
+    get:
+      summary: get data list
+      tags:
+        - Data
+      description: ''
+      parameters:
+        - name: pattern
+          in: query
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DataListResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+  '/data/{dataName}':
+    post:
+      summary: upload data
+      tags:
+        - Data
+      consumes:
+        - multipart/form-data
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/file'
+      responses:
+        '201':
+          description: OK
+          headers:
+            Location:
+              description: download uri
+              type: string
+          schema:
+            $ref: '#/definitions/DataMetaResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/CommonResponse'
+    get:
+      summary: download data
+      tags:
+        - Data
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/dataOwner'
+      produces:
+        - multipart/form-data
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: file
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+    put:
+      summary: data operation
+      tags:
+        - Menu
+      description: ''
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/startTime'
+        - $ref: '#/parameters/endTime'
+        - $ref: '#/parameters/action'
+        - $ref: '#/parameters/dataOwner'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/CommonResponse'
+    delete:
+      summary: delete data
+      tags:
+        - Data
+      description: ''
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/dataOwner'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '405':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/CommonResponse'
+  '/data/{dataName}/curves':
+    get:
+      summary: get raw, ref, label data and bands in given period
+      tags:
+        - Trend
+      description: ''
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/startTime'
+        - $ref: '#/parameters/endTime'
+        - $ref: '#/parameters/dataOwner'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TrendResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+  '/data/{dataName}/thumb':
+    get:
+      summary: get sample data for thumb
+      tags:
+        - Trend
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/dataOwner'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ThumbResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+  '/data/{dataName}/label':
+    put:
+      summary: mark normal or abnormal
+      tags:
+        - Label
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/startTime'
+        - $ref: '#/parameters/endTime'
+        - $ref: '#/parameters/label'
+        - $ref: '#/parameters/dataOwner'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/CommonResponse'
+  '/data/{dataName}/band/{bandName}':
+    get:
+      summary: get band
+      tags:
+        - Band
+        - NotImplemented
+      description: ''
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/bandName'
+        - $ref: '#/parameters/startTime'
+        - $ref: '#/parameters/endTime'
+        - $ref: '#/parameters/bandOrder'
+        - $ref: '#/parameters/dataOwner'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BandResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '501':
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/CommonResponse'
+    delete:
+      summary: delete band
+      tags:
+        - Band
+        - NotImplemented
+      description: ''
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - $ref: '#/parameters/bandName'
+        - $ref: '#/parameters/dataOwner'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '501':
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/CommonResponse'
+  '/data/{dataName}/privilege':
+    put:
+      summary: edit privilege of data
+      tags:
+        - Auth
+      description: only owner can change privilege of data
+      parameters:
+        - $ref: '#/parameters/dataName'
+        - name: public_read
+          description: public for everyone to read and download or not
+          in: query
+          type: boolean
+        - name: public_edit
+          description: public for everyone to label or not
+          in: query
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: login uri
+              type: string
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/CommonResponse'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/CommonResponse'
+  '/login/redirect':
+    get:
+      summary: redirect to login
+      tags:
+        - Auth
+      description: ''
+      responses:
+        '200':
+          description: OK, Redirect to oauth uri, msg is destination
+          schema:
+            $ref: '#/definitions/RedirectResponse'
+  '/login/redirect/github':
+    get:
+      summary: redirect to oauth
+      tags:
+        - Auth
+      description: ''
+      responses:
+        '302':
+          description: Move temporarily, Unauthorized
+          headers:
+            Location:
+              description: oauth login uri
+              type: string
+  '/login/callback/github':
+    get:
+      summary: oauth callback
+      tags:
+        - Auth
+      parameters:
+        - name: code
+          description: a temporary code in github callback
+          in: query
+          type: string
+        - name: state
+          description: An unguessable random string. It is used to protect against cross-site request forgery attacks.
+          required: false
+          in: query
+          type: string
+      description: ''
+      responses:
+        '302':
+          description: Move temporarily
+          headers:
+            Location:
+              description: oauth login callback
+              type: string
+  '/logout':
+    get:
+      summary: logout
+      tags:
+        - Auth
+      description: ''
+      responses:
+        '302':
+          description: Move temporarily, index
+          headers:
+            Location:
+              description: oauth login uri
+              type: string
+parameters:
+  dataName:
+    name: dataName
+    in: path
+    required: true
+    type: string
+  file:
+    description: csv file with <timestamp, value, label>
+    name: file
+    in: formData
+    type: file
+  bandName:
+    name: bandName
+    in: path
+    required: true
+    type: string
+  startTime:
+    description: ms
+    name: startTime
+    in: query
+    required: true
+    type: integer
+    format: int64
+  endTime:
+    description: ms
+    name: endTime
+    in: query
+    required: true
+    type: integer
+    format: int64
+  action:
+    description: operation name
+    name: action
+    in: query
+    required: true
+    type: string
+  label:
+    name: label
+    in: query
+    required: true
+    type: integer
+    format: int64
+    enum:
+      - 0
+      - 1
+      - -1
+  bandOrder:
+    name: order
+    in: query
+    type: string
+    enum:
+      - time
+      - reliability
+    default: time
+  dataOwner:
+    description: 'Not Implemented'
+    name: owner
+    in: query
+    required: false
+    type: string
+definitions:
+  Action:
+    properties:
+      name:
+        type: string
+        enum:
+          - 'Mark Normal'
+      action:
+        type: string
+        enum:
+          - 'cancel_label'
+  Time:
+    description: ms
+    type: integer
+    format: int64
+  TimeSlot:
+    required:
+      - start
+      - end
+    properties:
+      start:
+        $ref: '#/definitions/Time'
+      end:
+        $ref: '#/definitions/Time'
+  Meta:
+    required:
+      - id
+      - name
+      - uri
+      - time
+      - period
+      - labelRatio
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      uri:
+        description: download uri
+        type: string
+      time:
+        $ref: '#/definitions/TimeSlot'
+      display:
+        $ref: '#/definitions/TimeSlot'
+      period:
+        required:
+          - length
+          - ratio
+        properties:
+          length:
+            type: integer
+            format: int64
+          ratio:
+            type: number
+            format: float
+      labelRatio:
+        type: number
+        format: float
+      createTime:
+        $ref: '#/definitions/Time'
+      updateTime:
+        $ref: '#/definitions/Time'
+      owner:
+        type: string
+      public_read:
+        type: boolean
+      public_edit:
+        type: boolean
+  Trend:
+    required:
+      - name
+      - type
+      - data
+    properties:
+      name:
+        type: string
+      type:
+        type: string
+      data:
+        type: array
+        xml:
+          name: point
+          wrapped: true
+        items:
+          type: array
+          xml:
+            name: value
+            wrapped: true
+          minItems: 2
+          maxItems: 3
+          items:
+            type: number
+  BandTime:
+    required:
+      - duration
+      - show
+    properties:
+      duration:
+        $ref: '#/definitions/TimeSlot'
+      show:
+        $ref: '#/definitions/TimeSlot'
+  BandItems:
+    type: array
+    xml:
+      name: band
+      wrapped: true
+    items:
+      required:
+        - bandNo
+        - bandCount
+        - currentTime
+      properties:
+        bandNo:
+          type: integer
+          format: int64
+        bandCount:
+          type: integer
+          format: int64
+        currentTime:
+          $ref: '#/definitions/BandTime'
+        preTime:
+          $ref: '#/definitions/TimeSlot'
+        nextTime:
+          $ref: '#/definitions/TimeSlot'
+        reliability:
+          type: number
+          format: float
+  BandCategory:
+    required:
+      - name
+      - bands
+    properties:
+      name:
+        type: string
+      bands:
+        $ref: '#/definitions/BandItems'
+  CommonResponse:
+    required:
+      - msg
+      - server
+      - traceId
+    properties:
+      msg:
+        type: string
+      server:
+        type: string
+      traceId:
+        type: string
+  RedirectResponse:
+    required:
+      - data
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          data:
+            type: string
+  MenuResponse:
+    required:
+      - data
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          data:
+            type: array
+            xml:
+              name: menu
+              wrapped: true
+            items:
+              $ref: '#/definitions/Action'
+  DataMetaResponse:
+    required:
+      - data
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          data:
+            $ref: '#/definitions/Meta'
+  DataListResponse:
+    required:
+      - data
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          data:
+            type: array
+            xml:
+              name: meta
+              wrapped: true
+            items:
+              $ref: '#/definitions/Meta'
+  TrendResponse:
+    required:
+      - data
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          data:
+            required:
+              - trends
+              - bands
+              - yAxis
+            properties:
+              trends:
+                type: array
+                items:
+                  $ref: '#/definitions/Trend'
+              bands:
+                type: array
+                items:
+                  $ref: '#/definitions/BandCategory'
+              yAxis:
+                type: array
+                xml:
+                  name: value
+                  wrapped: true
+                minItems: 2
+                maxItems: 2
+                items:
+                  type: number
+                  format: float
+  ThumbResponse:
+    required:
+      - data
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          data:
+            $ref: '#/definitions/Trend'
+  BandResponse:
+    required:
+      - data
+    allOf:
+      - $ref: '#/definitions/CommonResponse'
+      - properties:
+          data:
+            $ref: '#/definitions/BandItems'
