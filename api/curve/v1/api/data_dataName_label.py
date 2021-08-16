@@ -37,6 +37,8 @@ class DataDatanameLabel(Resource):
         end_time = g.args['endTime'] / 1000
         label = g.args['label']
 
+        with_abnormal = False
+
         data_service.set_label(start_time, end_time, label)
 
         return self.render()

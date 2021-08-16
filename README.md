@@ -18,7 +18,7 @@
 >
 > `[BUG]` 更新2021-08-06: label异常问题: 0 和 0.0 解析不一致
 >
-> `[BUG]` 更新2021-08-06: 无法取消label的问题: trend.js 的 label函数
+> `[TIPS]` 更新2021-08-06: 取消label的方式: 框住区域后不要松开, 然后敲击空格键(keycode: 32), 再松开鼠标即可取消label标注
 
 # Problem 1: --no-site-packages
 
