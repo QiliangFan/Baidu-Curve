@@ -1,3 +1,4 @@
+rm api/curve/curve.db
 ./control_conda.sh stop
 sleep 1
 rm api/curve/web -rf
