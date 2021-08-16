@@ -13,7 +13,7 @@ import os
 file_path = os.path.abspath(os.path.dirname(__file__))
 
 STATIC_SERVER = 'http://localhost:12333'
-API_SERVER = 'http://localhost:12345'
+API_SERVER = 'http://localhost:12334'
 STATIC_FOLDER = 'web'
 STATIC_PATH = os.path.join(file_path, 'web')
 INDEX_PAGE = '/' + STATIC_FOLDER + '/index.html'
