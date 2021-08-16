@@ -561,7 +561,7 @@ export default class Trend extends Component {
             + dataName + '/label'
             + '?startTime=' + selectedMin
             + '&endTime=' + selectedMax
-            + '&label=' + e.button == 0 ? 1 : 0;
+            + '&label=1';
         let time = chart && chart.xAxis[0].getExtremes();
         if (selectType === 'simple') {
             axiosInstance.put(url).then(response => {
@@ -754,7 +754,7 @@ export default class Trend extends Component {
 
     getThumbDate(props) {
         let dataName = props.dataName || this.props.dataName;
-        if (!dataName) {
+        if (!dataName && props.list.length > 0) {
             dataName = props.list[0].name;
             eventProxy.trigger('messageTip', {
                 messageType: 'error',

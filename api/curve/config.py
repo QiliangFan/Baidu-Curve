@@ -23,7 +23,7 @@ DEFAULT_PORT = 8080
 SAMPLE_PIXELS = 1366
 
 DB_URL = 'sqlite:///' + os.path.join(file_path, 'curve.db')
-# DB_URL = 'sqlite:///:memory:'
+# DB_URL = 'sqlite:///:memory'
 
 LOG_PATH = os.path.abspath(os.path.join(file_path, os.path.pardir, 'log', 'curve'))
 LOG_LEVEL = logging.ERROR
