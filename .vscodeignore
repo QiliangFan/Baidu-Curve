@@ -6,3 +6,5 @@ api/curve/web/
 *.html
 **/__pycache__/
 *.pyc
+**/.git
+**/.vscode
